@@ -1,10 +1,11 @@
 import LayoutMain from "./LayoutMain";
 
+import Carousel from "../components/Carousel/Carousel";
 const Home = () => {
   return (
     <LayoutMain imagen="/1.jpg">
-      <main className="grow flex justify-center items-center">
-        <h3 className="text-3xl font-bold">INICIO</h3>
+      <main className="grow flex flex-col gap-5 justify-center items-center p-5">
+        <Carousel start={50} end={70} />
       </main>
     </LayoutMain>
   );
