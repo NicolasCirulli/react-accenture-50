@@ -19,7 +19,7 @@ const Header = () => {
 
   console.log(links);
   return (
-    <header className="px-3 flex justify-between items-center">
+    <header className="px-3 w-full bg-zinc-950/90 fixed flex justify-between items-center">
       <img src="/logo.png" alt="Logo pagina" className="w-14 h-14" />
       <nav className="flex gap-5">
         {links.map((link) => (

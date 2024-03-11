@@ -17,13 +17,13 @@ const Carousel = ({ start, end }) => {
   };
 
   return (
-    <div className="w-11/12 flex justify-between">
-      <button className="text-3xl" onClick={prev}>
+    <div className="w-11/12 lg:w-2/4 flex justify-between">
+      <button className={`text-3xl`} onClick={prev}>
         {" "}
         ⬅️{" "}
       </button>
       <CarouselItem champion={champion} />
-      <button className="text-3xl" onClick={next}>
+      <button className={`text-3xl`} onClick={next}>
         {" "}
         ➡️{" "}
       </button>
