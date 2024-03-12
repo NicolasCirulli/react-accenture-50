@@ -16,8 +16,6 @@ const Header = () => {
       active: "/builds" == location.pathname,
     },
   ];
-
-  console.log(links);
   return (
     <header className="px-3 w-full bg-zinc-950/90 fixed flex justify-between items-center">
       <img src="/logo.png" alt="Logo pagina" className="w-14 h-14" />
