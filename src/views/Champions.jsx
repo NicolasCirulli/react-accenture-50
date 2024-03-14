@@ -1,46 +1,50 @@
 import { useState, useEffect, useRef } from "react";
 import { getChampions } from "../services/championsQueries";
-import CarouselItem from "../components/Carousel/CarouselItem";
-
+import CardChampion from "../components/CardChampion";
+import { useSelector, useDispatch } from "react-redux";
+import { filterByName, load } from "../redux/actions/championsActions";
 const Champions = () => {
-  const [personajes, setPersonajes] = useState([]);
-  const [filtrados, setFiltrados] = useState([]);
   const inputBusqueda = useRef(null);
 
+  const dispatch = useDispatch();
+
+  const { all, filtered, search } = useSelector((store) => store.champions);
+
   useEffect(() => {
-    getChampions().then((data) => {
-      setPersonajes(data);
-      setFiltrados(data);
-    });
+    if (all.length == 0) {
+      getChampions().then((data) => {
+        dispatch(load(data));
+      });
+    }
   }, []);
 
   const handleInput = () => {
-    const aux = filterByName(personajes, inputBusqueda.current.value);
-    setFiltrados(aux);
+    dispatch(filterByName(inputBusqueda.current.value));
   };
 
-  const filterByName = (listaPersonajes, value) =>
-    listaPersonajes.filter((personaje) =>
-      personaje.name.toLowerCase().startsWith(value.toLowerCase())
-    );
-
-  const personajesCards = filtrados.map((personaje) => (
-    <CarouselItem key={personaje.id} champion={personaje} />
-  ));
   return (
-    <main className="grow flex flex-col gap-5 justify-center items-center pt-20">
-      <search className="w-full flex justify-center">
-        <input
-          type="text"
-          name="Name_champion"
-          className="w-3/4 rounded text-black outline-none"
-          onInput={handleInput}
-          ref={inputBusqueda}
-        />
-      </search>
-      <section className="w-full flex justify-center flex-wrap gap-5">
-        <h2 className="text-4xl text-blue-100 font-bold">Personajes</h2>
-        {filtrados.length > 0 && personajesCards}
+    <main className="grow flex gap-5 justify-center items-center pt-20">
+      <section className="w-full flex justify-center flex-wrap gap-5 ">
+        <h2 className="text-4xl text-zinc-100 font-bold w-full text-center">
+          Personajes
+        </h2>
+        <search className="w-full flex justify-center">
+          <input
+            type="text"
+            name="Name_champion"
+            className="w-3/4 md:w-2/5 h-8 font-semibold text-lg text-blue-950 rounded outline-none"
+            onInput={handleInput}
+            ref={inputBusqueda}
+            defaultValue={search}
+          />
+        </search>
+        {filtered.length > 0 ? (
+          filtered.map((personaje) => (
+            <CardChampion key={personaje.id} champion={personaje} />
+          ))
+        ) : (
+          <h2>No hay personajes que coincidan con esa busqueda</h2>
+        )}
       </section>
     </main>
   );

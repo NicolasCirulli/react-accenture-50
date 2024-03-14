@@ -9,5 +9,13 @@ export const getChampions = async () => {
     }
 }
 
- 
+export const getChampionById = async ( id ) => {
+    try {
+        const respuesta = await axios( 'http://localhost:4000/api/personajes/' + id )
+        return respuesta.data
+    } catch (error) {
+        return {}
+    }
+}
 
+/* http://localhost:4000/api/personajes/ + params.id  */
