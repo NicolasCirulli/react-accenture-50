@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 
-const CarouselItem = ({ champion }) => {
+const CardChampion = ({ champion }) => {
   return (
     <article className="w-9/12 max-w-[500px]">
       <img
-        className="w-full h-[350px] object-cover object-top"
+        className="w-full h-[400px] object-cover object-top"
         src={champion.image}
         alt={"Imagen de " + champion.name}
       />
@@ -22,4 +22,4 @@ const CarouselItem = ({ champion }) => {
   );
 };
 
-export default CarouselItem;
+export default CardChampion;
