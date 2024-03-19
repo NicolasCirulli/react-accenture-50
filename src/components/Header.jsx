@@ -11,9 +11,14 @@ const Header = () => {
       active: "/personajes" == location.pathname,
     },
     {
-      path: "/builds",
-      title: "Builds",
-      active: "/builds" == location.pathname,
+      path: "/registro",
+      title: "Registro",
+      active: "/registro" == location.pathname,
+    },
+    {
+      path: "/login",
+      title: "Login",
+      active: "/login" == location.pathname,
     },
   ];
   return (
