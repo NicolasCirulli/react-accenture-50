@@ -33,6 +33,12 @@ const Header = () => {
       active: "/login" == location.pathname,
       visible: user.first_name ? false : true,
     },
+    {
+      path: "/perfil",
+      title: "Perfil",
+      active: "/perfil" == location.pathname,
+      visible: user.first_name ? true : false,
+    },
   ];
 
   const handleClick = () => {
@@ -43,7 +49,7 @@ const Header = () => {
       <img src="/logo.png" alt="Logo pagina" className="w-14 h-14" />
       <nav className="flex gap-5">
         {links.map((link) => (
-          <Anchor link={link} />
+          <Anchor key={link.title} link={link} />
         ))}
 
         {user.first_name && (
