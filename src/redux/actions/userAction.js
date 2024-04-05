@@ -12,7 +12,14 @@ const logout = createAction( 'logout', () => {
     }
 } )
 
+const update = createAction( 'update', ( data ) => {
+    return {
+        payload : data
+    }
+} )
+
 export {
     login,
-    logout
+    logout,
+    update
 }

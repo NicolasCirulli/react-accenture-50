@@ -2,7 +2,11 @@ import { useState, useEffect, useRef } from "react";
 import { getChampions } from "../services/championsQueries";
 import CardChampion from "../components/CardChampion";
 import { useSelector, useDispatch } from "react-redux";
-import { filterByName, load } from "../redux/actions/championsActions";
+import {
+  filterByName,
+  load,
+  loadAsync,
+} from "../redux/actions/championsActions";
 const Champions = () => {
   const inputBusqueda = useRef(null);
 
@@ -12,9 +16,7 @@ const Champions = () => {
 
   useEffect(() => {
     if (all.length == 0) {
-      getChampions().then((data) => {
-        dispatch(load(data));
-      });
+      dispatch(loadAsync());
     }
   }, []);
 

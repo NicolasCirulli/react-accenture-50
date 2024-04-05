@@ -30,8 +30,21 @@ const loginWithToken = async ( ) => {
     }
 }
 
+const update = async( data ) => {
+    try {
+        const token = localStorage.getItem( 'token' )
+        const response = await axios.put( 'http://localhost:4000/api/users/update', data, {
+            headers: { Authorization: `Bearer ${token}` }
+        } )
+        return response.data 
+    } catch (error) {
+        return error.response.data
+    }
+}
+
 export default {
     register,
     login,
-    loginWithToken
+    loginWithToken,
+    update
 }

@@ -1,4 +1,5 @@
-import { createAction } from "@reduxjs/toolkit";
+import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
+import { getChampions } from "../../services/championsQueries";
 
 export const load = createAction( 'loadChampions', (champions) => {
     return {
@@ -11,3 +12,8 @@ export const filterByName = createAction( 'filterByName', ( value ) =>{
         payload : value
     }
 } )
+
+export const loadAsync = createAsyncThunk( 'loadAsync', async() => {
+    const personajes = await getChampions()
+    return personajes
+})
