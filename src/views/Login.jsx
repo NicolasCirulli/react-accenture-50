@@ -2,12 +2,17 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import authQueries from "../services/authQueries";
 import alerts from "../utils/alertas";
+import { useDispatch } from "react-redux";
+import { login } from "../redux/actions/userAction";
 function Login() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
   function handleInput(e) {
     const name = e.target.name;
     const value = e.target.value;
@@ -23,8 +28,8 @@ function Login() {
       if (!aux[key]) delete aux[key];
     }
     authQueries.login(aux).then((response) => {
-      console.log(response);
       if (response.status == 200) {
+        dispatch(login(response.data));
         alerts.success("Bienvenido/a " + response.data.first_name);
         navigate("/");
       } else {
